@@ -33,8 +33,39 @@ Setelah model dibangun, performanya akan dievaluasi menggunakan sejumlah metrik 
 
 
 ## Data Understanding
+Dataset yang digunakan berasal dari [Kaggle - Anime Dataset](https://www.kaggle.com/datasets/dbdmobile/myanimelist-dataset), yang berisi data anime dengan jumlah data sebanyak **24905 baris** dan **24 kolom**
 
-Dataset yang digunakan berasal dari [Kaggle - Anime Dataset](https://www.kaggle.com/datasets/dbdmobile/myanimelist-dataset), yang berisi data anime
+```
+RangeIndex: 24905 entries, 0 to 24904
+Data columns (total 24 columns):
+ #   Column        Non-Null Count  Dtype 
+---  ------        --------------  ----- 
+ 0   anime_id      24905 non-null  int64 
+ 1   Name          24905 non-null  object
+ 2   English name  24905 non-null  object
+ 3   Other name    24905 non-null  object
+ 4   Score         24905 non-null  object
+ 5   Genres        24905 non-null  object
+ 6   Synopsis      24905 non-null  object
+ 7   Type          24905 non-null  object
+ 8   Episodes      24905 non-null  object
+ 9   Aired         24905 non-null  object
+ 10  Premiered     24905 non-null  object
+ 11  Status        24905 non-null  object
+ 12  Producers     24905 non-null  object
+ 13  Licensors     24905 non-null  object
+ 14  Studios       24905 non-null  object
+ 15  Source        24905 non-null  object
+ 16  Duration      24905 non-null  object
+ 17  Rating        24905 non-null  object
+ 18  Rank          24905 non-null  object
+ 19  Popularity    24905 non-null  int64 
+ 20  Favorites     24905 non-null  int64 
+ 21  Scored By     24905 non-null  object
+ 22  Members       24905 non-null  int64 
+ 23  Image URL     24905 non-null  object
+
+
 
 ### EDA - Deskripsi Variabel
 
