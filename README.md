@@ -369,6 +369,23 @@ Dimana:
 
 *Interpretasi* dari hasil presisi berdasarkan *Tabel 1. Hasil Pengujian Model Content Based Filtering (dengan Filter Genres)* menunjukkan bahwa model rekomendasi Top-5 memiliki presisi sempurna, yaitu 5 dari 5 atau 100%. Hal ini mengindikasikan bahwa model tersebut mampu menghasilkan rekomendasi dengan tingkat ketepatan yang sangat tinggi. Hasil pengujian memperlihatkan bahwa model berhasil merekomendasikan anime dengan nama dan genre yang sangat mirip dengan **Haikyuu**, terutama dalam genre Sports. Kelima rekomendasi yang ditampilkan semuanya memiliki genre yang sesuai dengan **Haikyuu**.
 
+Untuk model K-Nearest Neighbor (KNN), dilakukan pengujian dengan merekomendasikan anime yang mirip dengan **Death Note**. Tabel hasil rekomendasi menunjukkan bahwa seluruh anime yang direkomendasikan memiliki nilai *similarity* di atas 0.999 dan diproduksi oleh studio yang sama, yaitu Madhouse, yang menunjukkan tingkat kemiripan yang sangat tinggi.
+
+Meskipun tidak dilakukan evaluasi kuantitatif dengan label ground-truth, hasil rekomendasi dapat dinilai **relevan secara semantik dan struktural** berdasarkan fitur yang digunakan. Sebagai contoh, seluruh hasil rekomendasi memiliki skor tinggi (di atas 8.5), berasal dari genre dan studio yang serupa, serta memiliki format rilis yang sama (TV series).
+
+Jika mengadopsi pendekatan manual menggunakan Precision@5:
+- Jumlah rekomendasi: 5
+- Rekomendasi relevan (berdasarkan kesamaan studio & skor tinggi): 5
+
+Maka:
+
+$$
+\text{Precision@5} = \frac{5}{5} = 1.0
+$$
+
+Ini menunjukkan bahwa model KNN juga memiliki **presisi 100%** dalam konteks uji kasus ini.
+
+> Catatan: evaluasi ini dilakukan secara manual dan bersifat eksploratif karena tidak tersedia ground-truth eksplisit dalam dataset.
 
 ## Referensi
 1. Ricci, F., Rokach, L., & Shapira, B. (2011). *Introduction to Recommender Systems Handbook*. Springer.  
