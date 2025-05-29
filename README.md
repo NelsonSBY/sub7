@@ -64,7 +64,8 @@ Data columns (total 24 columns):
  21  Scored By     24905 non-null  object
  22  Members       24905 non-null  int64 
  23  Image URL     24905 non-null  object
-
+dtypes: int64(4), object(20)
+```
 
 
 ### EDA - Deskripsi Variabel
@@ -121,7 +122,7 @@ Pada pendekatan **K-Nearest Neighbors (KNN)**, sistem merekomendasikan anime ber
 Walaupun terdapat fitur tambahan seperti **sinopsis, tanggal penayangan,** atau **jumlah episode** yang juga berpotensi meningkatkan performa model, fitur-fitur tersebut belum dimanfaatkan pada tahap awal ini untuk menjaga kompleksitas tetap rendah. Namun, fitur-fitur tersebut dapat dijadikan bahan eksplorasi lebih lanjut dalam pengembangan model di masa mendatang.
 
 
-Sebelum melakukan visualisasi akan diperiksa apakah dataframe mengalami duplikat & missing value, karena tidak mengalami hal tersebut bisa dilanjutkan dengan tahap visualisasi.
+Sebelum tahap visualisasi, beberapa kolom seperti Score dan Episodes masih mengandung nilai non-standar seperti 'UNKNOWN'. Pada tahap ini, nilai tersebut sengaja belum dibersihkan karena visualisasi bersifat eksploratif dan tidak seluruhnya bergantung pada kolom tersebut. Namun, sebelum pada tahap pemodelan, nilai 'UNKNOWN' akan dikonversi menjadi NaN dan ditangani dengan metode yang sesuai seperti penghapusan atau imputasi. Hal ini dilakukan untuk menjaga integritas data saat proses pelatihan model.
 
 ### Visualisasi
 Berdasarkan dataframe tersebut, dapat dibuat beberapa Interpretasi dan Insight:
@@ -211,18 +212,12 @@ Berdasarkan dataframe tersebut, dapat dibuat beberapa Interpretasi dan Insight:
 - Ada anime lama seperti Naruto dan Death Note, tapi juga ada yang relatif baru seperti Kimetsu no Yaiba dan Boku no Hero Academia, yang menunjukkan pertumbuhan komunitas tidak hanya tergantung usia anime.
 
 
-## Data Cleaning
+## Data Preparation
+- Konversi Tipe Data ke Numerik: kolom Score dan Episodes dikonversi dari tipe objek (string) menjadi numerik (float atau int).
+- Mengganti Nilai 'UNKNOWN' dengan NaN
 - Handling duplicate values: tidak ditemukan adanya duplicate values
 - Handling missing values: ditemukan adanya missing values akibat proses visualisasi data
-- Handling Drop Column : membuat kolom tambahan akibat proses visualisasi data
-
-**Alasan:**
-- Handling missing values diperiksa untuk memastikan tidak ada data kosong yang dapat mengganggu hasil model atau analisis.
-- Handling duplicate values diperiksa agar tidak ada duplikasi data yang bisa membuat bobot informasi menjadi tidak proporsional.
-- Handling Drop Column agar data yang digunakan original seperti diawal
-
-
-## Data Preparation
+- Handling Drop Column : membuang kolom tambahan akibat proses visualisasi data
 - Handling text cleaning
 - Handling Drop Column
 - Inisialisasi TfidfVectorizer
@@ -235,6 +230,12 @@ Berdasarkan dataframe tersebut, dapat dibuat beberapa Interpretasi dan Insight:
 
  
 **Alasan:**
+- Handling tipe data ke numerik khususnya kolom Score dan Episodes dilakukan karena proses visualisasi sebelumnya akan muncul visual jika data tersebut sudah dikonversi ke tipe data numerik.
+- Nilai 'UNKNOWN' tidak dapat diproses secara numerik maupun kategorikal, sehingga harus dikonversi menjadi NaN agar dapat ditangani dengan metode penanganan missing value seperti `dropna()` atau imputasi. Hal ini penting untuk menjaga integritas data dan mencegah error pada tahap pemodelan.
+- Penghapusan data dengan nilai NaN dilakukan untuk memastikan bahwa model hanya dilatih dengan data yang lengkap dan valid. Kehadiran missing values dapat menyebabkan error pada proses transformasi fitur atau menurunkan akurasi model jika tidak ditangani dengan benar.
+- Handling missing values diperiksa untuk memastikan tidak ada data kosong yang dapat mengganggu hasil model atau analisis.
+- Handling duplicate values diperiksa agar tidak ada duplikasi data yang bisa membuat bobot informasi menjadi tidak proporsional.
+- Handling Drop Column agar data yang digunakan original seperti diawal
 - Handling text cleaning untuk membersihkan teks dari tanda baca dan URL
 - Handling Drop Column karna data yang akan di hapus tidak mempengaruhi model
 - Inisialisasi TfidVectorizer dilakukan untuk mengubah data teks (dalam hal ini genre anime) menjadi representasi numerik dalam bentuk vektor. Dengan menggunakan TF-IDF, setiap genre diberi bobot berdasarkan frekuensi kemunculannya secara lokal (dalam satu anime) dan global (di seluruh dataset), sehingga genre yang lebih informatif akan memiliki pengaruh lebih besar dalam analisis dan pemodelan seperti sistem rekomendasi.
